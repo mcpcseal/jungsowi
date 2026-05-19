@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SlotMachine from './components/SlotMachine';
 import Baccarat from './components/Baccarat';
 import GraphGame from './components/GraphGame';
@@ -7,17 +7,51 @@ import Character from './components/Character';
 import './App.css';
 
 const INITIAL_BALANCE = 10000;
+const DEV_COMMAND = 'jungsowi';
+const DEV_BONUS = 100_000_000;
 
 type Tab = 'home' | 'slot' | 'baccarat' | 'graph' | 'blackjack';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
   const [balance, setBalance] = useState<number>(INITIAL_BALANCE);
+  const [devToast, setDevToast] = useState<boolean>(false);
+  const bufferRef = useRef<string>('');
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key.length !== 1) return;
+
+      bufferRef.current = (bufferRef.current + e.key.toLowerCase()).slice(-DEV_COMMAND.length);
+
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = setTimeout(() => { bufferRef.current = ''; }, 2000);
+
+      if (bufferRef.current === DEV_COMMAND) {
+        bufferRef.current = '';
+        setBalance(b => b + DEV_BONUS);
+        setDevToast(true);
+        if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+        toastTimerRef.current = setTimeout(() => setDevToast(false), 3000);
+      }
+    };
+
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   const addBalance = () => setBalance(b => b + 10000);
 
   return (
     <div className="app">
+      {devToast && (
+        <div className="dev-toast">
+          🛠️ 개발자 모드 — +{DEV_BONUS.toLocaleString()}P 지급!
+        </div>
+      )}
       <div className="neon-banner">
         ⚡ 정소위 카지노 — 군인도 쉬는 날엔 한 판! ⚡
       </div>

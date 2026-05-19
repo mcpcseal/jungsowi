@@ -19,6 +19,30 @@
 
 body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
 
+/* ── 개발자 모드 토스트 ── */
+.dev-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1a1a1a, #2a2a00);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 9999;
+  box-shadow: 0 4px 24px rgba(255,215,0,0.4);
+  animation: toast-in 0.3s ease-out;
+  white-space: nowrap;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 /* ── 네온 배너 ── */
 .neon-banner {
   background: linear-gradient(90deg, #0a0a0a, #1a1400, #0a0a0a);
