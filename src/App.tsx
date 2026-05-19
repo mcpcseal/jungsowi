@@ -30,7 +30,11 @@ export default function App() {
         </div>
         <div className="balance-area">
           <span className="balance-label">보유 포인트</span>
-          <span className="balance-value">{balance.toLocaleString()} P</span>
+          <span className="balance-value">
+            {balance >= 100_000_000
+              ? `Many(${balance.toLocaleString()})`
+              : `${balance.toLocaleString()} P`}
+          </span>
           <button className="charge-btn" onClick={addBalance}>+충전</button>
         </div>
       </header>
