@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import SlotMachine from './components/SlotMachine';
 import Baccarat from './components/Baccarat';
+import GraphGame from './components/GraphGame';
 import Character from './components/Character';
 import './App.css';
 
 const INITIAL_BALANCE = 10000;
 
-type Tab = 'home' | 'slot' | 'baccarat';
+type Tab = 'home' | 'slot' | 'baccarat' | 'graph';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
@@ -38,6 +39,7 @@ export default function App() {
           { id: 'home' as Tab,     label: '🏠 홈' },
           { id: 'slot' as Tab,     label: '🎰 슬롯머신' },
           { id: 'baccarat' as Tab, label: '🃏 바카라' },
+          { id: 'graph' as Tab,    label: '📈 그래프' },
         ].map(({ id, label }) => (
           <button
             key={id}
@@ -63,6 +65,7 @@ export default function App() {
                 <div className="home-buttons">
                   <button className="home-cta" onClick={() => setTab('slot')}>🎰 슬롯 플레이</button>
                   <button className="home-cta secondary" onClick={() => setTab('baccarat')}>🃏 바카라 플레이</button>
+                  <button className="home-cta secondary" onClick={() => setTab('graph')}>📈 그래프 플레이</button>
                 </div>
               </div>
             </div>
@@ -89,6 +92,12 @@ export default function App() {
                 <div className="game-card-desc">타이에 베팅하면 9배! 운명의 한 수</div>
                 <button className="game-card-btn">플레이</button>
               </div>
+              <div className="game-card" onClick={() => setTab('graph')}>
+                <div className="game-card-icon">📈</div>
+                <div className="game-card-title">그래프 게임</div>
+                <div className="game-card-desc">폭발 전에 캐시아웃! 최대 500배</div>
+                <button className="game-card-btn">플레이</button>
+              </div>
             </div>
           </div>
         )}
@@ -99,6 +108,10 @@ export default function App() {
 
         {tab === 'baccarat' && (
           <Baccarat balance={balance} setBalance={setBalance} />
+        )}
+
+        {tab === 'graph' && (
+          <GraphGame balance={balance} setBalance={setBalance} />
         )}
       </main>
 

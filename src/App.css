@@ -144,7 +144,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
 .notice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .notice-list li { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
 
-.game-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.game-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .game-card {
   background: var(--bg3);
   border: 1px solid var(--border-gold);
@@ -401,6 +401,80 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
 .side-bet-btn.active { background: rgba(255,215,0,0.15); border-color: var(--gold); color: var(--gold); font-weight: 700; }
 .payout-hint { font-size: 11px; color: var(--gold-dark); }
 
+/* ── 그래프 게임 ── */
+.graph-wrapper { display: flex; align-items: flex-start; gap: 28px; }
+.graph-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #050505;
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 16px;
+}
+.graph-multiplier {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  transition: color 0.15s;
+  text-shadow: 0 0 16px currentColor;
+  min-width: 220px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.graph-svg {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #020202;
+}
+.cashout-btn {
+  background: linear-gradient(135deg, #155a22, #27ae60);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.1s;
+  box-shadow: 0 4px 16px rgba(39,174,96,0.4);
+  animation: cashout-pulse 0.7s ease-in-out infinite alternate;
+}
+.cashout-btn:hover { transform: scale(1.05); }
+@keyframes cashout-pulse {
+  from { box-shadow: 0 4px 16px rgba(39,174,96,0.4); }
+  to   { box-shadow: 0 4px 28px rgba(39,174,96,0.8); }
+}
+.graph-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.auto-cashout-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  min-width: 300px;
+}
+.auto-cashout-label { color: var(--text-dim); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.auto-cashout-label input { cursor: pointer; accent-color: var(--gold); width: 14px; height: 14px; }
+.auto-cashout-options { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.graph-info {
+  display: flex;
+  gap: 28px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+.graph-info-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.graph-info-label { color: var(--text-dim); font-size: 12px; }
+.graph-info-value { color: var(--gold); font-size: 18px; font-weight: 700; }
+
 /* ── 푸터 ── */
 .footer {
   text-align: center;
@@ -417,7 +491,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
   .header { flex-direction: column; gap: 12px; padding: 16px; }
   .home-hero { flex-direction: column; text-align: center; padding: 24px; }
   .game-cards { grid-template-columns: 1fr; }
-  .slot-wrapper, .baccarat-layout { flex-direction: column; }
+  .slot-wrapper, .baccarat-layout, .graph-wrapper { flex-direction: column; align-items: center; }
   .baccarat-table { flex-direction: column; }
   .vs-divider { transform: rotate(90deg); }
+  .graph-multiplier { font-size: 32px; min-width: 160px; }
 }
