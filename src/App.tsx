@@ -2,12 +2,13 @@ import { useState } from 'react';
 import SlotMachine from './components/SlotMachine';
 import Baccarat from './components/Baccarat';
 import GraphGame from './components/GraphGame';
+import Blackjack from './components/Blackjack';
 import Character from './components/Character';
 import './App.css';
 
 const INITIAL_BALANCE = 10000;
 
-type Tab = 'home' | 'slot' | 'baccarat' | 'graph';
+type Tab = 'home' | 'slot' | 'baccarat' | 'graph' | 'blackjack';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
@@ -39,7 +40,8 @@ export default function App() {
           { id: 'home' as Tab,     label: '🏠 홈' },
           { id: 'slot' as Tab,     label: '🎰 슬롯머신' },
           { id: 'baccarat' as Tab, label: '🃏 바카라' },
-          { id: 'graph' as Tab,    label: '📈 그래프' },
+          { id: 'graph' as Tab,     label: '📈 그래프' },
+          { id: 'blackjack' as Tab, label: '🃏 블랙잭' },
         ].map(({ id, label }) => (
           <button
             key={id}
@@ -66,6 +68,7 @@ export default function App() {
                   <button className="home-cta" onClick={() => setTab('slot')}>🎰 슬롯 플레이</button>
                   <button className="home-cta secondary" onClick={() => setTab('baccarat')}>🃏 바카라 플레이</button>
                   <button className="home-cta secondary" onClick={() => setTab('graph')}>📈 그래프 플레이</button>
+                  <button className="home-cta secondary" onClick={() => setTab('blackjack')}>🃏 블랙잭 플레이</button>
                 </div>
               </div>
             </div>
@@ -98,6 +101,12 @@ export default function App() {
                 <div className="game-card-desc">폭발 전에 캐시아웃! 최대 500배</div>
                 <button className="game-card-btn">플레이</button>
               </div>
+              <div className="game-card" onClick={() => setTab('blackjack')}>
+                <div className="game-card-icon">🃏</div>
+                <div className="game-card-title">블랙잭</div>
+                <div className="game-card-desc">딜러를 꺾어라! 블랙잭 1.5배 보너스</div>
+                <button className="game-card-btn">플레이</button>
+              </div>
             </div>
           </div>
         )}
@@ -112,6 +121,10 @@ export default function App() {
 
         {tab === 'graph' && (
           <GraphGame balance={balance} setBalance={setBalance} />
+        )}
+
+        {tab === 'blackjack' && (
+          <Blackjack balance={balance} setBalance={setBalance} />
         )}
       </main>
 

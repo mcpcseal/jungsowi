@@ -144,7 +144,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
 .notice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .notice-list li { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
 
-.game-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.game-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .game-card {
   background: var(--bg3);
   border: 1px solid var(--border-gold);
@@ -401,6 +401,75 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
 .side-bet-btn.active { background: rgba(255,215,0,0.15); border-color: var(--gold); color: var(--gold); font-weight: 700; }
 .payout-hint { font-size: 11px; color: var(--gold-dark); }
 
+/* ── 블랙잭 ── */
+.bj-layout {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.bj-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 180px;
+}
+.bj-label { color: var(--gold); font-weight: 700; font-size: 15px; letter-spacing: 1px; }
+.bj-score {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 900;
+  min-height: 30px;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+.bj-divider {
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 900;
+  text-shadow: 0 0 10px var(--gold);
+}
+.card-small { width: 46px !important; height: 68px !important; font-size: 10px !important; }
+.card-small .card-center { font-size: 16px !important; }
+.bj-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.bj-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  letter-spacing: 1px;
+}
+.bj-hit    { background: linear-gradient(135deg, #1a5a8a, #2980b9); color: #fff; box-shadow: 0 3px 12px rgba(41,128,185,0.4); }
+.bj-stand  { background: linear-gradient(135deg, #7a1a1a, #c0392b); color: #fff; box-shadow: 0 3px 12px rgba(192,57,43,0.4); }
+.bj-double { background: linear-gradient(135deg, #7a5a00, var(--gold)); color: #000; box-shadow: 0 3px 12px rgba(255,215,0,0.3); }
+.bj-btn:hover { transform: translateY(-2px); filter: brightness(1.15); }
+.bj-current-bet {
+  color: var(--text-dim);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bj-current-bet span { color: var(--gold); font-weight: 700; }
+.bj-doubled-badge {
+  background: var(--gold);
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
 /* ── 그래프 게임 ── */
 .graph-wrapper { display: flex; align-items: flex-start; gap: 28px; }
 .graph-area {
@@ -490,7 +559,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-
 @media (max-width: 600px) {
   .header { flex-direction: column; gap: 12px; padding: 16px; }
   .home-hero { flex-direction: column; text-align: center; padding: 24px; }
-  .game-cards { grid-template-columns: 1fr; }
+  .game-cards { grid-template-columns: 1fr 1fr; }
+  .bj-layout { gap: 12px; }
+  .bj-side { min-width: 140px; padding: 14px; }
   .slot-wrapper, .baccarat-layout, .graph-wrapper { flex-direction: column; align-items: center; }
   .baccarat-table { flex-direction: column; }
   .vs-divider { transform: rotate(90deg); }
